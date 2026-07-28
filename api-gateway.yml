@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: api-gateway
   cloud:
     gateway:
       discovery:
@@ -36,12 +38,14 @@ spring:
         - id: comment-service
           uri: lb://COMMENT-SERVICE
           predicates:
-            - Path=/comments/**, /attachments/**
+            - Path=/comments/**
+            - Path=/attachments/**
 
         - id: label-service
           uri: lb://LABEL-SERVICE
           predicates:
-            - Path=/labels/**, /checklists/**
+            - Path=/labels/**
+            - Path=/checklists/**
 
         - id: notification-service
           uri: lb://NOTIFICATION-SERVICE
@@ -57,4 +61,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info,gateway
