@@ -1,0 +1,60 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+      routes:
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+
+        - id: workspace-service
+          uri: lb://WORKSPACE-SERVICE
+          predicates:
+            - Path=/workspaces/**
+
+        - id: board-service
+          uri: lb://BOARD-SERVICE
+          predicates:
+            - Path=/boards/**
+
+        - id: list-service
+          uri: lb://LIST-SERVICE
+          predicates:
+            - Path=/lists/**
+
+        - id: card-service
+          uri: lb://CARD-SERVICE
+          predicates:
+            - Path=/cards/**
+
+        - id: comment-service
+          uri: lb://COMMENT-SERVICE
+          predicates:
+            - Path=/comments/**, /attachments/**
+
+        - id: label-service
+          uri: lb://LABEL-SERVICE
+          predicates:
+            - Path=/labels/**, /checklists/**
+
+        - id: notification-service
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/notifications/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
