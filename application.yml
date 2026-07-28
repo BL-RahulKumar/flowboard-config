@@ -36,6 +36,39 @@ management:
 
         include: "*"
 
+spring:
+
+  security:
+
+    oauth2:
+
+      client:
+
+        registration:
+
+          google:
+
+            client-id: YOUR_GOOGLE_CLIENT_ID
+
+            client-secret: YOUR_GOOGLE_CLIENT_SECRET
+
+            scope:
+
+              - email
+
+              - profile
+
+          github:
+
+            client-id: Ov23liNjWUDA3XO5vmm0
+
+            client-secret: f0021db5d8c4638e18e27fbc23b682b01e870460
+
+            scope:
+
+              - user:email
+        
+
 jwt:
   secret: 8Qe6fXz2K9mN5pR1vT7yU3aB8dE4gH6jL0nP2sW9xY5zC1vM7qR4tF8kN6dA3hJ
   access-token-expiration: 900000
