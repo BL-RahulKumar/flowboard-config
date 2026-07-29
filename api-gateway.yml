@@ -4,33 +4,27 @@ server:
 spring:
   application:
     name: api-gateway
+
   cloud:
     gateway:
       discovery:
         locator:
-          enabled: true
-          lower-case-service-id: true
+          enabled: false
       routes:
         - id: auth-service
           uri: lb://AUTH-SERVICE
           predicates:
             - Path=/auth/**
-          filters:
-            - StripPrefix=1
 
         - id: workspace-service
           uri: lb://WORKSPACE-SERVICE
           predicates:
             - Path=/workspaces/**
-          filters:
-            - StripPrefix=1
 
         - id: board-service
           uri: lb://BOARD-SERVICE
           predicates:
             - Path=/boards/**
-          filters:
-            - StripPrefix=1
 
 eureka:
   client:
