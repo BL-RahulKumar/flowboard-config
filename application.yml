@@ -1,6 +1,3 @@
-spring:
-  application:
-    name: Hello
 eureka:
   client:
     register-with-eureka: true
