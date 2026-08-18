@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: auth-service-route
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**, /auth-service/auth/**
+          filters:
+            - RewritePath=/auth-service/(?<segment>.*), /$\{segment}
+
+        - id: workspace-service-route
+          uri: lb://WORKSPACE-SERVICE
+          predicates:
+            - Path=/workspaces/**, /workspace-service/workspaces/**
+          filters:
+            - RewritePath=/workspace-service/(?<segment>.*), /$\{segment}
+
+        - id: board-service-route
+          uri: lb://BOARD-SERVICE
+          predicates:
+            - Path=/boards/**, /board-service/boards/**
+          filters:
+            - RewritePath=/board-service/(?<segment>.*), /$\{segment}
