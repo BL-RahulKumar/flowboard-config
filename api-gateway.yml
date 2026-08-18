@@ -11,21 +11,21 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-        - id: auth-service-route
+        - id: auth-service
           uri: lb://AUTH-SERVICE
           predicates:
             - Path=/auth/**, /auth-service/auth/**
           filters:
             - RewritePath=/auth-service/(?<segment>.*), /$\{segment}
 
-        - id: workspace-service-route
+        - id: workspace-service
           uri: lb://WORKSPACE-SERVICE
           predicates:
             - Path=/workspaces/**, /workspace-service/workspaces/**
           filters:
             - RewritePath=/workspace-service/(?<segment>.*), /$\{segment}
 
-        - id: board-service-route
+        - id: board-service
           uri: lb://BOARD-SERVICE
           predicates:
             - Path=/boards/**, /board-service/boards/**
